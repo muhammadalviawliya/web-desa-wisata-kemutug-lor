@@ -30,7 +30,7 @@ while ($d = mysqli_fetch_array($data)) {
 
     <body>
         <!-- navbar -->
-        <section class="navbar navbar-expand-lg navbar-dark <?php echo $d['warna']; ?>">
+        <section class="navbar navbar-expand-lg navbar-dark <?php echo $d['kode']; ?>">
             <div class="container">
                 <a class="navbar-brand" href="#"><?php echo $d['nama_desa']; ?></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,44 +64,27 @@ while ($d = mysqli_fetch_array($data)) {
                 <h2>Wisata Alam</h2>
             </div>
             <div class="row mb-5 mt-5">
-                <div class="col-md-4 col-sm-12 mb-3">
-                    <div class="card">
-                        <img class="card-img-top" src="images/curug-pinang.jpg" height="200px" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Curug Pinang</h5>
+                <?php
+                $data = mysqli_query($koneksi, "select * from wisata WHERE jenis_wisata='wisata alam' ");
+                while ($data1 = mysqli_fetch_array($data)) {
+                ?>
+                    <div class="col-md-4 col-sm-12 mb-3">
+                        <div class="card">
+                            <img class="card-img-top" src="images/curug-pinang.jpg" height="200px" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo $data1['nama'] ?></h5>
+                                <button type="button" href="wisata_alam.php?link=lihatDetailBerita.php&id=<?= $hasil_data['id_berita']; ?>" class="btn btn-outline-success">Success</button>
+                            </div>
+
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4 col-sm-12 mb-3">
-                    <div class="card">
-                        <img class="card-img-top" src="images/wanawisata.jpg" height="200px" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Wanawisata Baturraden</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-12 mb-3">
-                    <div class="card">
-                        <img class="card-img-top" src="images/kebun-raya.jpg" height="200px" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Kebun Raya Baturraden</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-12 mb-3">
-                    <div class="card">
-                        <img class="card-img-top" src="images/error.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Kali Belot</h5>
-                        </div>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
         <!-- card wisata end  -->
 
         <!-- FOOTER -->
-        <div class="container-fluid text-light <?php echo $d['warna']; ?>">
+        <div class="container-fluid text-light <?php echo $d['kode']; ?>">
             <footer class="row row-cols-5 py-5  border-top">
                 <div class="col ">
                     <a class="navbar-brand text-light" href="#"><?php echo $d['nama_desa']; ?></a>

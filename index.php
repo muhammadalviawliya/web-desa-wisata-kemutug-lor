@@ -30,7 +30,7 @@ while ($d = mysqli_fetch_array($data)) {
 
     <body>
         <!-- navbar -->
-        <section class="navbar navbar-expand-lg navbar-dark <?php echo $d['warna']; ?> ">
+        <section class="navbar navbar-expand-lg navbar-dark <?php echo $d['kode']; ?> ">
             <div class="container">
                 <a class="navbar-brand" href="#"><?php echo $d['nama_desa']; ?></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -101,59 +101,54 @@ while ($d = mysqli_fetch_array($data)) {
             </a>
         </section>
         <!-- carousel end -->
+        <?php
+        $sql = mysqli_query($koneksi, "select * from info_desa WHERE id='1' ");
+        while ($hasil = mysqli_fetch_array($sql)) {
+        ?>
+            <!-- grid sejarah -->
+            <section id="sejarah">
+                <div class="container ">
+                    <div class="row text-center mt-5 mb-5">
+                        <div class="col">
+                            <h2>Sejarah Desa</h2>
+                        </div>
+                    </div>
 
-        <!-- grid sejarah -->
-        <section id="sejarah">
-            <div class="container ">
-                <div class="row text-center mt-5 mb-5">
-                    <div class="col">
-                        <h2>Sejarah Desa</h2>
+                    <div class="row fs-5 mb-5">
+                        <div class="col-sm">
+                            <img src="images/<?php echo $hasil['gambar'] ?>" alt="" width="200px" height="200px">
+                        </div>
+                        <div class="col-sm">
+                            <p class="text-justify"><?php echo $hasil['paragraf1'] ?></p>
+                        </div>
+                        <div class="col-sm">
+                            <p class="text-justify"><?php echo $hasil['paragraf2'] ?>
+                            </p>
+                        </div>
                     </div>
                 </div>
+            </section>
+            <!-- grid sejarah end -->
 
-                <div class="row fs-5 mb-5">
-                    <div class="col-sm">
-                        <img src="images/Lambang_Kabupaten_Banyumas.png" alt="" width="200px" height="200px">
-                    </div>
-                    <div class="col-sm">
-                        <p class="text-justify">Desa Kemutug Lor tercipta pada zaman kerajaan. Konon pada saat itu, dari DPO
-                            kerjaan kemudian
-                            mendirikan rumah dan sebagainya hingga beranak pinak. Arti dari Kemutug Lor sendiri adalah
-                            tempat
-                            tujuan terakhir (daerah puputan).</p>
-                    </div>
-                    <div class="col-sm">
-                        <p class="text-justify">Secara administrasi desa Kemutuglor termasuk dalam wilayah kecamatan
-                            Baturraden Kabupaten
-                            Banyumas.
-                            Dari ibu kota kecamatan Baturraden berjarak kurang lebih 3 km, yang dapat ditempuh dengan
-                            angkutan
-                        </p>
-                    </div>
+            <!-- video profil desa -->
+            <div class="container text-center  mt-5">
+                <h2>Profil Desa</h2>
+                <div class="videowrapper">
+                    <iframe src="<?php echo $hasil['youtube'] ?>" frameborder="0" gesture="media"></iframe>
                 </div>
             </div>
-        </section>
-        <!-- grid sejarah end -->
+            <!-- video profil desa end -->
 
-        <!-- video profil desa -->
-        <div class="container text-center  mt-5">
-            <h2>Profil Desa</h2>
-            <div class="videowrapper">
-                <iframe src="https://www.youtube.com/embed/j080EtTegsk" frameborder="0" gesture="media"></iframe>
+
+            <div class="container text-center mt-5">
+                <h2>Map Desa</h2>
+                <div class="mapwrapper">
+                    <iframe width="1200" height="500" src="<?php echo $hasil['map'] ?>" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
             </div>
-        </div>
-        <!-- video profil desa end -->
-
-
-        <div class="container text-center mt-5">
-            <h2>Map Desa</h2>
-            <div class="mapwrapper">
-                <iframe width="1200" height="500" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63320.77138548259!2d109.18871389392048!3d-7.292130602583804!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6ff48d7d9ac4ed%3A0x29fb6b6f439482f9!2sKemutug%20Lor%2C%20Kec.%20Baturaden%2C%20Kabupaten%20Banyumas%2C%20Jawa%20Tengah!5e0!3m2!1sid!2sid!4v1629851199077!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-        </div>
-
+        <?php } ?>
         <!-- FOOTER -->
-        <div class="container-fluid  <?php echo $d['warna']; ?> text-light">
+        <div class="container-fluid  <?php echo $d['kode']; ?> text-light">
             <footer class="row row-cols-5 py-5  border-top">
                 <div class="col ">
                     <a class="navbar-brand text-light" href="#"><?php echo $d['nama_desa']; ?></a>
@@ -175,7 +170,6 @@ while ($d = mysqli_fetch_array($data)) {
 
                     </ul>
                 </div>
-
                 <div class="col">
                     <h5 class="text-warning">Berita</h5>
                     <ul class="nav flex-column ">

@@ -30,7 +30,7 @@ while ($d = mysqli_fetch_array($data)) {
 
     <body>
         <!-- navbar -->
-        <section class="navbar navbar-expand-lg navbar-dark <?php echo $d['warna']; ?>">
+        <section class="navbar navbar-expand-lg navbar-dark <?php echo $d['kode']; ?>">
             <div class="container">
                 <a class="navbar-brand" href="#"><?php echo $d['nama_desa']; ?></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -141,7 +141,7 @@ while ($d = mysqli_fetch_array($data)) {
         <!-- pricing end -->
 
         <!-- FOOTER -->
-        <div class="container-fluid text-light <?php echo $d['warna']; ?>">
+        <div class="container-fluid text-light <?php echo $d['kode']; ?>">
             <footer class="row row-cols-5 py-5  border-top">
                 <div class="col ">
                     <a class="navbar-brand text-light" href="#"><?php echo $d['nama_desa']; ?></a>
