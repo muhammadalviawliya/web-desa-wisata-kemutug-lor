@@ -7,8 +7,7 @@
   <title>AdminLTE 3 | Dashboard 2</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- overlayScrollbars -->
@@ -50,8 +49,7 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="index.html" class="brand-link">
-        <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-          style="opacity: .8">
+        <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Desa Kemutug Lor</span>
       </a>
 
@@ -84,7 +82,7 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
             <li class="nav-item">
-              <a href="./index.html" class="nav-link">
+              <a href="index.php" class="nav-link">
                 <i class="nav-icon fas fa-home"></i>
                 <p>
                   Home
@@ -120,6 +118,30 @@
                 <i class="nav-icon fas fa-calendar-alt"></i>
                 <p>
                   Kegiatan
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="info_desa.php" class="nav-link">
+                <i class="nav-icon fas fa-suitcase-rolling"></i>
+                <p>
+                  Paket Wisata
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="info_desa.php" class="nav-link">
+                <i class="nav-icon fas fa-shopping-cart"></i>
+                <p>
+                  UMKM
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="info_desa.php" class="nav-link">
+                <i class="nav-icon fas fa-info"></i>
+                <p>
+                  Info Desa
                 </p>
               </a>
             </li>
@@ -216,6 +238,67 @@
                 <div class="info-box-content">
                   <span class="info-box-text">Kegiatan</span>
                   <span class="info-box-number">2,000</span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-light elevation-1"><i class="fas fa-suitcase-rolling"></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Paket Wisata</span>
+                  <span class="info-box-number">2,000</span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-shopping-cart"></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Kegiatan</span>
+                  <span class="info-box-number">2,000</span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-12 col-lg-6 col-md-3">
+              <div class="info-box mb-3">
+                <div class="info-box-content">
+                  <span class="info-box-text text-light">
+                    <h1 id="jam"></h1>
+                    <h2 id="tanggal"></h2>
+                    <script>
+                      window.setTimeout("waktu()", 1000);
+
+                      function waktu() {
+                        var waktu = new Date();
+                        setTimeout("waktu()", 1000);
+                        document.getElementById("jam").innerHTML = waktu.getHours() + ":" + String(waktu.getMinutes()).padStart(2, "0");
+                      }
+                    </script>
+                    <script>
+                      var tw = new Date();
+                      if (tw.getTimezoneOffset() == 0)(a = tw.getTime() + (7 * 60 * 60 * 1000))
+                      else(a = tw.getTime());
+                      tw.setTime(a);
+                      var tahun = tw.getFullYear();
+                      var hari = tw.getDay();
+                      var bulan = tw.getMonth();
+                      var tanggal = tw.getDate();
+                      var hariarray = new Array("minggu,", "senin,", "selasa,", "rabu,", "kamis,", "jumat,", "sabtu,");
+                      var bulanarray = new Array("januari", "februari", "maret", "april", "mei", "juni", "juli", "agustus", "september", "oktober", "november", "desember");
+                      document.getElementById("tanggal").innerHTML = hariarray[hari] + " " + tanggal + " " + bulanarray[bulan] + " " + tahun;
+                    </script>
+                  </span>
                 </div>
                 <!-- /.info-box-content -->
               </div>
