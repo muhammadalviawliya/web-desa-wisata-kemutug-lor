@@ -220,10 +220,10 @@
                     <td><?php echo $d['nama'] ?></td>
                     <td><?php echo $d['deskripsi'] ?></td>
                     <td><?php echo $d['jenis_wisata'] ?></td>
-                    <td><?php echo $d['gambar'] ?></td>
+                    <td><img src="../images/<?php echo $d['gambar'] ?>" alt="" width="50px" height="50px"></td>
                     <td>
-                      <a class="btn btn-warning btn-sm" href="">UBAH</a>
-                      <a class="btn btn-danger btn-sm" href="">HAPUS</a>
+                      <a class="btn btn-warning btn-sm">Ubah</a>
+                      <a class="btn btn-danger btn-sm" href="hapus_wisata.php?id_wisata=<?php echo $d['id_wisata'] ?>">Hapus</a>
                     </td>
                   </tr>
                 <?php
@@ -256,6 +256,7 @@
 
         </div>
         <!-- /.content -->
+
       </div>
       <!-- /.content-wrapper -->
 
