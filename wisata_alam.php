@@ -70,7 +70,7 @@ while ($d = mysqli_fetch_array($data)) {
                 ?>
                     <div class="col-md-4 col-sm-12 mb-3">
                         <div class="card">
-                            <img class="card-img-top" src="images/curug-pinang.jpg" height="200px" alt="Card image cap">
+                            <img class="card-img-top" src="images/<?php echo $data1['gambar'] ?>" height="200px" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $data1['nama'] ?></h5>
                                 <button type="button" href="wisata_alam.php?link=lihatDetailBerita.php&id=<?= $hasil_data['id_berita']; ?>" class="btn btn-outline-success">Success</button>
