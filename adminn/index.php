@@ -146,7 +146,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="./index.html" class="nav-link">
+              <a href="pengaturan.php" class="nav-link">
                 <i class="nav-icon fas fa-sliders-h"></i>
                 <p>
                   Pengaturan
@@ -167,13 +167,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Dashboard v2</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard v2</li>
-              </ol>
+              <h1 class="m-0">Home</h1>
             </div><!-- /.col -->
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -183,17 +177,59 @@
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
+          <div class="info-box mb-3 mt-5">
+            <div class="info-box-content">
+              <span class="info-box-text text-light">
+                <h1 class="text-center" id="jam"></h1>
+                <h2 class="text-center" id="tanggal"></h2>
+                <script>
+                  window.setTimeout("waktu()", 1000);
+
+                  function waktu() {
+                    var waktu = new Date();
+                    setTimeout("waktu()", 1000);
+                    document.getElementById("jam").innerHTML = waktu.getHours() + ":" + String(waktu.getMinutes()).padStart(2, "0");
+                  }
+                </script>
+                <script>
+                  var tw = new Date();
+                  if (tw.getTimezoneOffset() == 0)(a = tw.getTime() + (7 * 60 * 60 * 1000))
+                  else(a = tw.getTime());
+                  tw.setTime(a);
+                  var tahun = tw.getFullYear();
+                  var hari = tw.getDay();
+                  var bulan = tw.getMonth();
+                  var tanggal = tw.getDate();
+                  var hariarray = new Array("minggu,", "senin,", "selasa,", "rabu,", "kamis,", "jumat,", "sabtu,");
+                  var bulanarray = new Array("januari", "februari", "maret", "april", "mei", "juni", "juli", "agustus", "september", "oktober", "november", "desember");
+                  document.getElementById("tanggal").innerHTML = hariarray[hari] + " " + tanggal + " " + bulanarray[bulan] + " " + tahun;
+                </script>
+              </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
           <!-- Info boxes -->
           <div class="row">
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box">
                 <span class="info-box-icon bg-info elevation-1"><i class="fas fa-map-marked-alt"></i></span>
+                <?php
+                // https://www.malasngoding.com
 
+                // menghubungkan dengan koneksi database
+                include '../koneksi.php';
+
+                // mengambil data barang
+                $data_wisata = mysqli_query($koneksi, "SELECT * FROM wisata");
+
+                // menghitung data barang
+                $jumlah_wisata = mysqli_num_rows($data_wisata);
+                ?>
                 <div class="info-box-content">
                   <span class="info-box-text">Wisata</span>
                   <span class="info-box-number">
-                    10
-                    <small>%</small>
+                    <h4> <?php echo $jumlah_wisata; ?></h4>
                   </span>
                 </div>
                 <!-- /.info-box-content -->
@@ -262,43 +298,8 @@
                 <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-shopping-cart"></i></span>
 
                 <div class="info-box-content">
-                  <span class="info-box-text">Kegiatan</span>
+                  <span class="info-box-text">UMKM</span>
                   <span class="info-box-number">2,000</span>
-                </div>
-                <!-- /.info-box-content -->
-              </div>
-              <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
-            <div class="col-12 col-lg-6 col-md-3">
-              <div class="info-box mb-3">
-                <div class="info-box-content">
-                  <span class="info-box-text text-light">
-                    <h1 id="jam"></h1>
-                    <h2 id="tanggal"></h2>
-                    <script>
-                      window.setTimeout("waktu()", 1000);
-
-                      function waktu() {
-                        var waktu = new Date();
-                        setTimeout("waktu()", 1000);
-                        document.getElementById("jam").innerHTML = waktu.getHours() + ":" + String(waktu.getMinutes()).padStart(2, "0");
-                      }
-                    </script>
-                    <script>
-                      var tw = new Date();
-                      if (tw.getTimezoneOffset() == 0)(a = tw.getTime() + (7 * 60 * 60 * 1000))
-                      else(a = tw.getTime());
-                      tw.setTime(a);
-                      var tahun = tw.getFullYear();
-                      var hari = tw.getDay();
-                      var bulan = tw.getMonth();
-                      var tanggal = tw.getDate();
-                      var hariarray = new Array("minggu,", "senin,", "selasa,", "rabu,", "kamis,", "jumat,", "sabtu,");
-                      var bulanarray = new Array("januari", "februari", "maret", "april", "mei", "juni", "juli", "agustus", "september", "oktober", "november", "desember");
-                      document.getElementById("tanggal").innerHTML = hariarray[hari] + " " + tanggal + " " + bulanarray[bulan] + " " + tahun;
-                    </script>
-                  </span>
                 </div>
                 <!-- /.info-box-content -->
               </div>
@@ -308,24 +309,26 @@
           </div>
           <!-- /.row -->
 
-          <!-- /.row -->
+
         </div>
-        <!--/. container-fluid -->
-      </section>
-      <!-- /.content -->
+        <!-- /.row -->
     </div>
-    <!-- /.content-wrapper -->
+    <!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
 
 
 
-    <!-- Main Footer -->
-    <footer class="main-footer">
-      <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-      All rights reserved.
-      <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 3.1.0
-      </div>
-    </footer>
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 3.1.0
+    </div>
+  </footer>
   </div>
   <!-- ./wrapper -->
 
