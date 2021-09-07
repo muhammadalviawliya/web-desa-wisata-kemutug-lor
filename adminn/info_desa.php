@@ -189,7 +189,7 @@ while ($d = mysqli_fetch_array($data)) {
         <!-- Main content -->
         <div class="container">
           <div class="row justify-content-center mt-5 ml-5 mb-5">
-            <form class="col-8" method="POST" action="edit_info.php" enctype="multipart/form-data">
+            <form class="col-8" method="POST" action="proses_edit_info.php" enctype="multipart/form-data">
               <div class=" form-group col-5">
                 <label>Logo Desa</label>
                 <br>
