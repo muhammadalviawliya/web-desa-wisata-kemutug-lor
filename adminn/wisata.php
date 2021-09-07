@@ -186,7 +186,7 @@
         <div class="container">
 
           <div class="table-responsive-md mt-5 ml-5 mr-5">
-            <a class="btn btn-success btn-sm mb-3" href="">Tambah</a>
+            <a class="btn btn-success btn-sm mb-3" href="tambah_wisata.php">Tambah</a>
             <table class="table table-bordered table-striped table-hover">
               <thead>
                 <tr>
@@ -222,7 +222,7 @@
                     <td><?php echo $d['jenis_wisata'] ?></td>
                     <td><img src="../images/<?php echo $d['gambar'] ?>" alt="" width="50px" height="50px"></td>
                     <td>
-                      <a class="btn btn-warning btn-sm">Ubah</a>
+                      <a class="btn btn-warning btn-sm" href="edit_wisata.php?id_wisata=<?php echo $d['id_wisata'] ?>">Ubah</a>
                       <a class="btn btn-danger btn-sm" href="hapus_wisata.php?id_wisata=<?php echo $d['id_wisata'] ?>">Hapus</a>
                     </td>
                   </tr>

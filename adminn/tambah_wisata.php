@@ -208,7 +208,7 @@ while ($d = mysqli_fetch_array($data)) {
                   $hasil = mysqli_query($koneksi, $sql);
                   while ($data = mysqli_fetch_array($hasil)) {
 
-                    echo "<option>" . $data['nama'] . "</option>";
+                    echo "<option>" . $data['jenis_wisata'] . "</option>";
                   }
                   ?>
                 </select>
