@@ -189,7 +189,7 @@ while ($d = mysqli_fetch_array($data)) {
         <!-- Main content -->
         <div class="container">
           <div class="row justify-content-center mt-5 ml-5 mb-5">
-            <form class="col-8" method="POST" action="edit.php">
+            <form class="col-8" method="POST" action="proses_edit_pengaturan.php">
               <div class="form-group ">
                 <label for="nama">Nama Desa</label>
                 <input type="text" name="nama_desa" class="form-control" value="<?php echo $d['nama_desa']; ?>">
