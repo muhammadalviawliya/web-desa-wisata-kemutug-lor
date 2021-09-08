@@ -106,7 +106,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="./index.html" class="nav-link">
+              <a href="galeri.php" class="nav-link">
                 <i class="nav-icon fas fa-image"></i>
                 <p>
                   Galeri
@@ -200,8 +200,8 @@
                   var hari = tw.getDay();
                   var bulan = tw.getMonth();
                   var tanggal = tw.getDate();
-                  var hariarray = new Array("minggu,", "senin,", "selasa,", "rabu,", "kamis,", "jumat,", "sabtu,");
-                  var bulanarray = new Array("januari", "februari", "maret", "april", "mei", "juni", "juli", "agustus", "september", "oktober", "november", "desember");
+                  var hariarray = new Array("Minggu,", "Senin,", "Selasa,", "Rabu,", "Kamis,", "Jumat,", "Sabtu,");
+                  var bulanarray = new Array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
                   document.getElementById("tanggal").innerHTML = hariarray[hari] + " " + tanggal + " " + bulanarray[bulan] + " " + tahun;
                 </script>
               </span>
@@ -215,21 +215,14 @@
               <div class="info-box">
                 <span class="info-box-icon bg-info elevation-1"><i class="fas fa-map-marked-alt"></i></span>
                 <?php
-                // https://www.malasngoding.com
-
-                // menghubungkan dengan koneksi database
                 include '../koneksi.php';
-
-                // mengambil data barang
                 $data_wisata = mysqli_query($koneksi, "SELECT * FROM wisata");
-
-                // menghitung data barang
                 $jumlah_wisata = mysqli_num_rows($data_wisata);
                 ?>
                 <div class="info-box-content">
                   <span class="info-box-text">Wisata</span>
                   <span class="info-box-number">
-                    <h4> <?php echo $jumlah_wisata; ?></h4>
+                    <?php echo $jumlah_wisata; ?>
                   </span>
                 </div>
                 <!-- /.info-box-content -->
@@ -257,10 +250,16 @@
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
                 <span class="info-box-icon bg-success elevation-1"><i class="fas fa-image"></i></span>
-
+                <?php
+                include '../koneksi.php';
+                $data_galeri = mysqli_query($koneksi, "SELECT * FROM galeri");
+                $jumlah_galeri = mysqli_num_rows($data_galeri);
+                ?>
                 <div class="info-box-content">
                   <span class="info-box-text">Galeri</span>
-                  <span class="info-box-number">760</span>
+                  <span class="info-box-number">
+                    <?php echo $jumlah_galeri; ?>
+                  </span>
                 </div>
                 <!-- /.info-box-content -->
               </div>
