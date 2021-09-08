@@ -107,7 +107,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="galeri.php" class="nav-link">
                   <i class="nav-icon fas fa-image"></i>
                   <p>
                     Galeri

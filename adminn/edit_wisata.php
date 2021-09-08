@@ -224,7 +224,6 @@
                  <label>Gambar</label>
                  <br>
                  <img src='../images/<?php echo $d['gambar'] ?>' width='100' height='100'>
-                 <input type="hidden" name="gambar_lama" value="<?php echo $d['gambar'] ?>">
                  <input id="gambar" name="gambar" type="file" class="form-control">
                </div>
 
