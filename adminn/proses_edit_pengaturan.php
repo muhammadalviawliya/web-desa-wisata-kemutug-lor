@@ -13,5 +13,5 @@ if (isset($_POST['ubah'])) {
     $result = mysqli_query($koneksi, "UPDATE pengaturan SET nama_desa='$nama_desa',kode='$kode',facebook='$facebook',instagram='$instagram' WHERE id='1'");
 
     // Redirect to homepage to display updated user in list
-    header("Location: pengaturan.php");
+    echo "<script>alert('Data berhasil diubah.');window.location='pengaturan.php';</script>";
 }
