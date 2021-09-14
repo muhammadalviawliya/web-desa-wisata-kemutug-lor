@@ -331,6 +331,44 @@ if ($_SESSION['status'] != "login") {
               <!-- /.info-box -->
             </div>
             <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-images"></i></span>
+                <?php
+                include '../koneksi.php';
+                $data_carousel = mysqli_query($koneksi, "SELECT * FROM carousel");
+                $jumlah_carousel = mysqli_num_rows($data_carousel);
+                ?>
+                <div class="info-box-content">
+                  <span class="info-box-text">Carousel</span>
+                  <span class="info-box-number">
+                    <?php echo $jumlah_carousel; ?>
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-secondary elevation-1"><i class="fas fa-user-friends"></i></span>
+                <?php
+                include '../koneksi.php';
+                $data_admin = mysqli_query($koneksi, "SELECT * FROM admin");
+                $jumlah_admin = mysqli_num_rows($data_admin);
+                ?>
+                <div class="info-box-content">
+                  <span class="info-box-text">Admin</span>
+                  <span class="info-box-number">
+                    <?php echo $jumlah_admin; ?>
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
           </div>
           <!-- /.row -->
 

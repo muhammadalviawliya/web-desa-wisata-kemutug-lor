@@ -217,7 +217,7 @@
              </div>
              <div class="form-group ">
                <label for="nama">Deskripsi</label>
-               <textarea name="deskripsi" rows="3" class="form-control"></textarea>
+               <textarea name="deskripsi" rows="5" class="form-control"></textarea>
              </div>
 
 
@@ -240,7 +240,14 @@
                <br>
                <input id="gambar" name="gambar" type="file" class="form-control">
              </div>
-
+             <div class="form-group ">
+               <label for="nama">Harga</label>
+               <textarea name="harga" rows="5" class="form-control"></textarea>
+             </div>
+             <div class=" form-group ">
+               <label for=" nama">map</label>
+               <input type="text" name="map" class="form-control">
+             </div>
 
 
              <button type="submit" class="btn btn-success" name="Tambah">Tambah</button>

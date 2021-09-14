@@ -76,7 +76,10 @@ while ($d = mysqli_fetch_array($data)) {
                             <img class="card-img-top" src="images/curug-pinang.jpg" height="200px" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $data1['nama'] ?></h5>
-                                <button type="button" href="wisata_alam.php?link=lihatDetailBerita.php&id=<?= $hasil_data['id_berita']; ?>" class="btn btn-outline-success">Success</button>
+                                <p class="card-text"><?php echo $data1['deskripsi'] ?></p>
+                                <h6>Harga Tiket</h6>
+                                <p class="card-text"><?php echo nl2br($data1['harga']); ?></p>
+                                <button type="button" class="btn" value="<?php echo $data1['map'] ?>">Map</button>
                             </div>
 
                         </div>

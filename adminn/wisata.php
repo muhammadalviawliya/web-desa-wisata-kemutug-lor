@@ -221,6 +221,8 @@
                   <th>Deskripsi</th>
                   <th>Jenis Wisata</th>
                   <th>Gambar</th>
+                  <th>Harga</th>
+                  <th>Map</th>
                   <th>Opsi</th>
                 </tr>
               </thead>
@@ -247,6 +249,8 @@
                     <td><?php echo $d['deskripsi'] ?></td>
                     <td><?php echo $d['jenis_wisata'] ?></td>
                     <td><img src="../images/<?php echo $d['gambar'] ?>" alt="" width="50px" height="50px"></td>
+                    <td><?php echo $d['harga'] ?></td>
+                    <td><?php echo $d['map'] ?></td>
                     <td>
                       <a class="btn btn-warning btn-sm" href="edit_wisata.php?id_wisata=<?php echo $d['id_wisata'] ?>">Ubah</a>
                       <a class="btn btn-danger btn-sm" href="hapus_wisata.php?id_wisata=<?php echo $d['id_wisata'] ?>">Hapus</a>

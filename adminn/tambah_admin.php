@@ -125,7 +125,7 @@
              </a>
            </li>
            <li class="nav-item">
-             <a href="kegiatan.php" class="nav-link">
+             <a href="kegiatan" class="nav-link">
                <i class="nav-icon fas fa-calendar-alt"></i>
                <p>
                  Kegiatan
@@ -194,12 +194,12 @@
          <div class="container-fluid">
            <div class="row mb-2">
              <div class="col-sm-6">
-               <h1 class="m-0">Ubah Wisata</h1>
+               <h1 class="m-0">Tambah Admin</h1>
              </div><!-- /.col -->
              <div class="col-sm-6">
                <ol class="breadcrumb float-sm-right">
-                 <li class="breadcrumb-item"><a href="wisata.php">Wisata</a></li>
-                 <li class="breadcrumb-item active">Ubah Wisata</li>
+                 <li class="breadcrumb-item"><a href="admin.php">Admin</a></li>
+                 <li class="breadcrumb-item active">Tambah Admin</li>
                </ol>
              </div><!-- /.col -->
            </div><!-- /.row -->
@@ -208,65 +208,26 @@
        <!-- /.content-header -->
 
        <!-- Main content -->
-       <?php
-        include '../koneksi.php';
-        $id_wisata = $_GET['id_wisata'];
-        $data = mysqli_query($koneksi, "select * from wisata WHERE id_wisata='$id_wisata' ");
-        while ($d = mysqli_fetch_array($data)) {
-        ?>
-         <div class="container">
-           <div class="row justify-content-center mt-5 ml-5 mb-5">
-             <form class="col-8" method="POST" action="proses_edit_wisata.php" enctype="multipart/form-data">
-               <input type="hidden" name="id_wisata" value="<?php echo $d['id_wisata'] ?>">
-               <div class=" form-group ">
-                 <label for=" nama">Wisata</label>
-                 <input type="text" name="wisata" class="form-control" value="<?php echo $d['nama'] ?>">
-               </div>
-               <div class="form-group ">
-                 <label for="nama">Deskripsi</label>
-                 <textarea name="deskripsi" rows="5" class="form-control"><?php echo $d['deskripsi'] ?></textarea>
-               </div>
-
-
-               <div class="form-group">
-                 <label for="Warna">Jenis wisata</label>
-                 <select name="jenis_wisata" class="form-control">
-                   <?php
-                    $sql = "select * from jenis_wisata";
-                    $hasil = mysqli_query($koneksi, $sql);
-                    while ($data = mysqli_fetch_array($hasil)) {
-                      if ($d['jenis_wisata'] == $data['jenis_wisata']) {
-                        $select = "selected";
-                      } else {
-                        $select = "";
-                      }
-                      echo "<option $select>" . $data['jenis_wisata'] . "</option>";
-                    }
-                    ?>
-                 </select>
-               </div>
-
-               <div class=" form-group col-5">
-                 <label>Gambar</label>
-                 <br>
-                 <img src='../images/<?php echo $d['gambar'] ?>' width='100' height='100'>
-                 <input id="gambar" name="gambar" type="file" class="form-control">
-               </div>
-               <div class="form-group ">
-                 <label for="nama">Harga</label>
-                 <textarea name="harga" rows="5" class="form-control"><?php echo $d['harga'] ?></textarea>
-               </div>
-               <div class=" form-group ">
-                 <label for=" nama">map</label>
-                 <input type="text" name="map" class="form-control" value="<?php echo $d['map'] ?>">
-               </div>
-
-
-               <button type="submit" class="btn btn-warning" name="Tambah">Edit</button>
-             </form>
-           </div>
+       <div class="container">
+         <div class="row justify-content-center mt-5 ml-5 mb-5">
+           <form class="col-8" method="POST" action="proses_tambah_admin.php" enctype="multipart/form-data">
+             <div class=" form-group ">
+               <label for=" nama">Nama</label>
+               <input type="text" name="nama" class="form-control">
+             </div>
+             <div class=" form-group ">
+               <label for=" nama">Email</label>
+               <input type="email" name="email" class="form-control">
+             </div>
+             <div class=" form-group ">
+               <label for=" nama">Password</label>
+               <input type="password" name="password" class="form-control">
+             </div>
+             <button type="submit" class="btn btn-success" name="Tambah">Tambah</button>
+           </form>
          </div>
-         <!-- /.content -->
+       </div>
+       <!-- /.content -->
      </div>
      <!-- /.content-wrapper -->
 
@@ -294,8 +255,5 @@
    <script src="dist/js/adminlte.js"></script>
 
  </body>
- <?php
-        }
-  ?>
 
  </html>

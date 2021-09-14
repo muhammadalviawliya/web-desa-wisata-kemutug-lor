@@ -210,58 +210,26 @@
        <!-- Main content -->
        <?php
         include '../koneksi.php';
-        $id_wisata = $_GET['id_wisata'];
-        $data = mysqli_query($koneksi, "select * from wisata WHERE id_wisata='$id_wisata' ");
+        $id_admin = $_GET['id_admin'];
+        $data = mysqli_query($koneksi, "select * from admin WHERE id_admin='$id_admin' ");
         while ($d = mysqli_fetch_array($data)) {
         ?>
          <div class="container">
            <div class="row justify-content-center mt-5 ml-5 mb-5">
-             <form class="col-8" method="POST" action="proses_edit_wisata.php" enctype="multipart/form-data">
-               <input type="hidden" name="id_wisata" value="<?php echo $d['id_wisata'] ?>">
+             <form class="col-8" method="POST" action="proses_edit_admin.php">
+               <input type="hidden" name="id_admin" value="<?php echo $d['id_admin'] ?>">
                <div class=" form-group ">
-                 <label for=" nama">Wisata</label>
-                 <input type="text" name="wisata" class="form-control" value="<?php echo $d['nama'] ?>">
-               </div>
-               <div class="form-group ">
-                 <label for="nama">Deskripsi</label>
-                 <textarea name="deskripsi" rows="5" class="form-control"><?php echo $d['deskripsi'] ?></textarea>
-               </div>
-
-
-               <div class="form-group">
-                 <label for="Warna">Jenis wisata</label>
-                 <select name="jenis_wisata" class="form-control">
-                   <?php
-                    $sql = "select * from jenis_wisata";
-                    $hasil = mysqli_query($koneksi, $sql);
-                    while ($data = mysqli_fetch_array($hasil)) {
-                      if ($d['jenis_wisata'] == $data['jenis_wisata']) {
-                        $select = "selected";
-                      } else {
-                        $select = "";
-                      }
-                      echo "<option $select>" . $data['jenis_wisata'] . "</option>";
-                    }
-                    ?>
-                 </select>
-               </div>
-
-               <div class=" form-group col-5">
-                 <label>Gambar</label>
-                 <br>
-                 <img src='../images/<?php echo $d['gambar'] ?>' width='100' height='100'>
-                 <input id="gambar" name="gambar" type="file" class="form-control">
-               </div>
-               <div class="form-group ">
-                 <label for="nama">Harga</label>
-                 <textarea name="harga" rows="5" class="form-control"><?php echo $d['harga'] ?></textarea>
+                 <label for=" nama">Nama</label>
+                 <input type="text" name="nama" class="form-control" value="<?php echo $d['nama'] ?>">
                </div>
                <div class=" form-group ">
-                 <label for=" nama">map</label>
-                 <input type="text" name="map" class="form-control" value="<?php echo $d['map'] ?>">
+                 <label for=" nama">Email</label>
+                 <input type="email" name="email" class="form-control" value="<?php echo $d['email'] ?>">
                </div>
-
-
+               <div class=" form-group ">
+                 <label for=" nama">Password</label>
+                 <input type="text" name="password" class="form-control" value="<?php echo $d['password'] ?>">
+               </div>
                <button type="submit" class="btn btn-warning" name="Tambah">Edit</button>
              </form>
            </div>

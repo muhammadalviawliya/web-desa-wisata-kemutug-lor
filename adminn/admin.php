@@ -194,12 +194,12 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0">Paket Wisata</h1>
+                <h1 class="m-0">Admin</h1>
               </div><!-- /.col -->
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item"><a href="home.php">Home</a></li>
-                  <li class="breadcrumb-item active">Paket Wisata</li>
+                  <li class="breadcrumb-item active">Admin</li>
                 </ol>
               </div><!-- /.col -->
             </div><!-- /.row -->
@@ -212,44 +212,32 @@
         <div class="container">
 
           <div class="table-responsive-md mt-5 ml-5 mr-5">
-            <a class="btn btn-success btn-sm mb-3" href="tambah_paket.php">Tambah</a>
+            <a class="btn btn-success btn-sm mb-3" href="tambah_admin.php">Tambah</a>
             <table class="table table-bordered table-striped table-hover">
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>judul</th>
-                  <th>Deskripsi</th>
-                  <th>Harga</th>
-                  <th>No WhatsApp</th>
+                  <th>Nama</th>
+                  <th>Email</th>
+                  <th>password</th>
                   <th>Opsi</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
                 include '../koneksi.php';
-                $batas = 5;
-                $halaman = isset($_GET['halaman']) ? (int)$_GET['halaman'] : 1;
-                $halaman_awal = ($halaman > 1) ? ($halaman * $batas) - $batas : 0;
-
-                $previous = $halaman - 1;
-                $next = $halaman + 1;
-                $data = mysqli_query($koneksi, "select * from paket_wisata");
-                $jumlah_data = mysqli_num_rows($data);
-                $total_halaman = ceil($jumlah_data / $batas);
-
-                $data_pegawai = mysqli_query($koneksi, "select * from paket_wisata limit $halaman_awal, $batas");
-                $nomor = $halaman_awal + 1;
-                while ($d = mysqli_fetch_array($data_pegawai)) {
+                $data = mysqli_query($koneksi, "select * from admin ");
+                $nomor = 1;
+                while ($d = mysqli_fetch_array($data)) {
                 ?>
                   <tr>
                     <td><?php echo $nomor++; ?></td>
-                    <td><?php echo $d['judul'] ?></td>
-                    <td><?php echo $d['deskripsi'] ?></td>
-                    <td><?php echo $d['harga'] ?></td>
-                    <td><?php echo $d['no_wa'] ?></td>
+                    <td><?php echo $d['nama'] ?></td>
+                    <td><?php echo $d['email'] ?></td>
+                    <td><?php echo md5($d['password']); ?></td>
                     <td>
-                      <a class="btn btn-warning btn-sm" href="edit_paket.php?id_paket=<?php echo $d['id_paket'] ?>">Ubah</a>
-                      <a class="btn btn-danger btn-sm" href="hapus_paket.php?id_paket=<?php echo $d['id_paket'] ?>">Hapus</a>
+                      <a class="btn btn-warning btn-sm" href="edit_admin.php?id_admin=<?php echo $d['id_admin'] ?>">Ubah</a>
+                      <a class="btn btn-danger btn-sm" href="hapus_admin.php?id_admin=<?php echo $d['id_admin'] ?>">Hapus</a>
                     </td>
                   </tr>
                 <?php
@@ -257,27 +245,6 @@
                 ?>
               </tbody>
             </table>
-            <nav>
-              <ul class="pagination justify-content-center">
-                <li class="page-item">
-                  <a class="page-link bg-light" <?php if ($halaman > 1) {
-                                                  echo "href='?halaman=$previous'";
-                                                } ?>>Previous</a>
-                </li>
-                <?php
-                for ($x = 1; $x <= $total_halaman; $x++) {
-                ?>
-                  <li class="page-item"><a class="page-link bg-light" href="?halaman=<?php echo $x ?>"><?php echo $x; ?></a></li>
-                <?php
-                }
-                ?>
-                <li class="page-item">
-                  <a class="page-link bg-light" <?php if ($halaman < $total_halaman) {
-                                                  echo "href='?halaman=$next'";
-                                                } ?>>Next</a>
-                </li>
-              </ul>
-            </nav>
           </div>
 
         </div>

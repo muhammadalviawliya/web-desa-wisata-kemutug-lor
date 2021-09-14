@@ -7,6 +7,8 @@ $wisata   = $_POST['wisata'];
 $deskripsi     = $_POST['deskripsi'];
 $jenis_wisata    = $_POST['jenis_wisata'];
 $gambar = $_FILES['gambar']['name'];
+$harga    = $_POST['harga'];
+$map    = $_POST['map'];
 
 
 //cek dulu jika ada gambar produk jalankan coding ini
@@ -20,7 +22,7 @@ if ($gambar != "") {
     if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
         move_uploaded_file($file_tmp, '../images/' . $nama_gambar_baru); //memindah file gambar ke folder gambar
         // jalankan query INSERT untuk menambah data ke database pastikan sesuai urutan (id tidak perlu karena dibikin otomatis)
-        $query = "INSERT INTO wisata (nama, deskripsi, jenis_wisata, gambar) VALUES ('$wisata', '$deskripsi', '$jenis_wisata',  '$nama_gambar_baru')";
+        $query = "INSERT INTO wisata (nama, deskripsi, jenis_wisata, gambar, harga, map) VALUES ('$wisata', '$deskripsi', '$jenis_wisata',  '$nama_gambar_baru', '$harga', '$map')";
         $result = mysqli_query($koneksi, $query);
         // periska query apakah ada error
         if (!$result) {
@@ -36,7 +38,7 @@ if ($gambar != "") {
         echo "<script>alert('Ekstensi gambar yang boleh hanya jpg atau png.');window.location='tambah_wisata.php';</script>";
     }
 } else {
-    $query = "INSERT INTO wisata (nama, deskripsi, jenis_wisata, gambar) VALUES ('$wisata', '$deskripsi', '$jenis_wisata',  null)";
+    $query = "INSERT INTO wisata (nama, deskripsi, jenis_wisata, gambar, harga, map) VALUES ('$wisata', '$deskripsi', '$jenis_wisata',  null, '$harga', '$map')";
     $result = mysqli_query($koneksi, $query);
     // periska query apakah ada error
     if (!$result) {

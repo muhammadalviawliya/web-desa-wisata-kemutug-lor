@@ -76,11 +76,10 @@ while ($d = mysqli_fetch_array($data)) {
                             <img class="card-img-top" src="images/<?php echo $data1['gambar'] ?>" height="200px" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $data1['nama'] ?></h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <h6>harga tiket</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <h6>alamat</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text"><?php echo $data1['deskripsi'] ?></p>
+                                <h6>Harga Tiket</h6>
+                                <p class="card-text"><?php echo nl2br($data1['harga']); ?></p>
+                                <button type="button" class="btn" value="<?php echo $data1['map'] ?>">Map</button>
                             </div>
 
                         </div>

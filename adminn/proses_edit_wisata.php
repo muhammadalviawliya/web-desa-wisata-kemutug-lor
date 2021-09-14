@@ -8,6 +8,8 @@ $wisata   = $_POST['wisata'];
 $deskripsi     = $_POST['deskripsi'];
 $jenis_wisata    = $_POST['jenis_wisata'];
 $gambar = $_FILES['gambar']['name'];
+$harga    = $_POST['harga'];
+$map    = $_POST['map'];
 //cek dulu jika merubah gambar produk jalankan coding ini
 if ($gambar != "") {
     $ekstensi_diperbolehkan = array('png', 'jpg'); //ekstensi file gambar yang bisa diupload 
@@ -20,7 +22,7 @@ if ($gambar != "") {
         move_uploaded_file($file_tmp, '../images/' . $nama_gambar_baru); //memindah file gambar ke folder gambar
 
         // jalankan query UPDATE berdasarkan ID yang produknya kita edit
-        $query  = "UPDATE wisata SET nama = '$wisata', deskripsi = '$deskripsi', jenis_wisata = '$jenis_wisata',  gambar = '$nama_gambar_baru'";
+        $query  = "UPDATE wisata SET nama = '$wisata', deskripsi = '$deskripsi', jenis_wisata = '$jenis_wisata',  gambar = '$nama_gambar_baru', harga='$harga', map='$map'";
         $query .= "WHERE id_wisata = '$id_wisata'";
         $result = mysqli_query($koneksi, $query);
         // periska query apakah ada error
@@ -38,7 +40,7 @@ if ($gambar != "") {
     }
 } else {
     // jalankan query UPDATE berdasarkan ID yang produknya kita edit
-    $query  = "UPDATE wisata SET nama = '$wisata', deskripsi = '$deskripsi', jenis_wisata = '$jenis_wisata'";
+    $query  = "UPDATE wisata SET nama = '$wisata', deskripsi = '$deskripsi', jenis_wisata = '$jenis_wisata', harga='$harga', map='$map'";
     $query .= "WHERE id_wisata = '$id_wisata'";
     $result = mysqli_query($koneksi, $query);
     // periska query apakah ada error

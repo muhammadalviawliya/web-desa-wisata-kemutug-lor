@@ -30,5 +30,5 @@ if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
     }
 } else {
     //jika file ekstensi tidak jpg dan png maka alert ini yang tampil
-    echo "<script>alert('Ekstensi gambar yang boleh hanya jpg atau png / data kosong');window.location='edit_galeri.php?id_galeri=$id_galeri';</script>";
+    echo "<script>alert('Ekstensi gambar yang boleh hanya jpg atau png / data kosong');window.location='edit_galeri.php=?id_galeri=$id_galeri';</script>";
 }
