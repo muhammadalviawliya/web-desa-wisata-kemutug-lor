@@ -1,7 +1,7 @@
   <?php
   session_start();
   if ($_SESSION['status'] != "login") {
-    header("location:login.php?pesan=belum_login");
+    header("location:index.php?pesan=belum_login");
   }
   ?>
   <!DOCTYPE html>
@@ -10,7 +10,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard 2</title>
+    <title>Dashboard</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -54,117 +54,121 @@
       <!-- Main Sidebar Container -->
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="index.php" class="brand-link">
-          <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-          <span class="brand-text font-weight-light">Desa Kemutug Lor</span>
-        </a>
-
-        <!-- Sidebar -->
-        <div class="sidebar">
-          <!-- Sidebar user panel (optional) -->
-          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-              <img src="dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info">
-              <h6>admin</h6>
-              <a type="button" class="btn btn-danger btn-xs" href="logout.php">Logout</a>
-            </div>
-          </div>
-
-          <!-- SidebarSearch Form -->
-          <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-              <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-              <div class="input-group-append">
-                <button class="btn btn-sidebar">
-                  <i class="fas fa-search fa-fw"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Sidebar Menu -->
-          <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-              <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
-              <li class="nav-item">
-                <a href="index.php" class="nav-link">
-                  <i class="nav-icon fas fa-home"></i>
-                  <p>
-                    Home
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="wisata.php" class="nav-link">
-                  <i class="nav-icon fas fa-map-marked-alt"></i>
-                  <p>
-                    Wisata
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index.html" class="nav-link">
-                  <i class="nav-icon fas fa-newspaper"></i>
-                  <p>
-                    Artikel
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="galeri.php" class="nav-link">
-                  <i class="nav-icon fas fa-image"></i>
-                  <p>
-                    Galeri
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index.html" class="nav-link">
-                  <i class="nav-icon fas fa-calendar-alt"></i>
-                  <p>
-                    Kegiatan
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="info_desa.php" class="nav-link">
-                  <i class="nav-icon fas fa-suitcase-rolling"></i>
-                  <p>
-                    Paket Wisata
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="info_desa.php" class="nav-link">
-                  <i class="nav-icon fas fa-shopping-cart"></i>
-                  <p>
-                    UMKM
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="info_desa.php" class="nav-link">
-                  <i class="nav-icon fas fa-info"></i>
-                  <p>
-                    Info Desa
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pengaturan.php" class="nav-link">
-                  <i class="nav-icon fas fa-sliders-h"></i>
-                  <p>
-                    Pengaturan
-                  </p>
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <!-- /.sidebar-menu -->
+        <div class="brand-link">
+          <?php
+          include '../koneksi.php';
+          $data = mysqli_query($koneksi, "select * from info_desa WHERE id='1' ");
+          while ($d = mysqli_fetch_array($data)) {
+          ?>
+            <img src="../images/<?php echo $d['gambar'] ?>" alt="AdminLTE Logo" class="brand-image img-circle" style="opacity: .8;width: 35px;px;height:35px">
+          <?php } ?>
+          <?php
+          include '../koneksi.php';
+          $data = mysqli_query($koneksi, "select * from pengaturan WHERE id='1' ");
+          while ($d = mysqli_fetch_array($data)) {
+          ?>
+            <span class="brand-text font-weight-light "><?php echo $d['nama_desa'] ?></span>
         </div>
-        <!-- /.sidebar -->
+      <?php } ?>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img src="dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
+          </div>
+          <div class="info">
+            <h6><?= @$_SESSION['nama']; ?></h6>
+            <a type="button" class="btn btn-danger btn-xs" href="logout.php">Logout</a>
+          </div>
+        </div>
+
+        <!-- SidebarSearch Form -->
+        <div class="form-inline">
+          <div class="input-group" data-widget="sidebar-search">
+            <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+            <div class="input-group-append">
+              <button class="btn btn-sidebar">
+                <i class="fas fa-search fa-fw"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
+            <li class="nav-item">
+              <a href="home.php" class="nav-link">
+                <i class="nav-icon fas fa-home"></i>
+                <p>
+                  Home
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="wisata.php" class="nav-link">
+                <i class="nav-icon fas fa-map-marked-alt"></i>
+                <p>
+                  Wisata
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="galeri.php" class="nav-link">
+                <i class="nav-icon fas fa-image"></i>
+                <p>
+                  Galeri
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="kegiatan.php" class="nav-link">
+                <i class="nav-icon fas fa-calendar-alt"></i>
+                <p>
+                  Kegiatan
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="paket_wisata.php" class="nav-link">
+                <i class="nav-icon fas fa-suitcase-rolling"></i>
+                <p>
+                  Paket Wisata
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="umkm.php" class="nav-link">
+                <i class="nav-icon fas fa-shopping-cart"></i>
+                <p>
+                  UMKM
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="info_desa.php" class="nav-link">
+                <i class="nav-icon fas fa-info"></i>
+                <p>
+                  Info Desa
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="pengaturan.php" class="nav-link">
+                <i class="nav-icon fas fa-sliders-h"></i>
+                <p>
+                  Pengaturan
+                </p>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
       </aside>
 
       <!-- Content Wrapper. Contains page content -->
@@ -178,7 +182,7 @@
               </div><!-- /.col -->
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item"><a href="home.php">Home</a></li>
                   <li class="breadcrumb-item active">Wisata</li>
                 </ol>
               </div><!-- /.col -->

@@ -4,7 +4,6 @@ if ($_SESSION['status'] != "login") {
   header("location:index.php?pesan=belum_login");
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -179,13 +178,7 @@ if ($_SESSION['status'] != "login") {
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Pengaturan</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="home.php">Home</a></li>
-                <li class="breadcrumb-item active">Pengaturan</li>
-              </ol>
+              <h1 class="m-0">Home</h1>
             </div><!-- /.col -->
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -193,59 +186,158 @@ if ($_SESSION['status'] != "login") {
       <!-- /.content-header -->
 
       <!-- Main content -->
-      <?php
-      include '../koneksi.php';
-      $data = mysqli_query($koneksi, "select * from pengaturan WHERE id='1' ");
-      while ($d = mysqli_fetch_array($data)) {
-      ?>
-        <div class="container">
-          <div class="row justify-content-center mt-5 ml-5 mb-5">
-            <form class="col-8" method="POST" action="proses_edit_pengaturan.php">
-              <div class="form-group ">
-                <label for="nama">Nama Desa</label>
-                <input type="text" name="nama_desa" class="form-control" value="<?php echo $d['nama_desa']; ?>">
-              </div>
+      <section class="content">
+        <div class="container-fluid">
+          <div class="info-box mb-3 mt-5">
+            <div class="info-box-content">
+              <span class="info-box-text text-light">
+                <h1 class="text-center" id="jam"></h1>
+                <h2 class="text-center" id="tanggal"></h2>
+                <script>
+                  window.setTimeout("waktu()", 1000);
 
-              <div class="form-group">
-                <label for="Warna">Warna</label>
-                <input type="color" name="warna" value="<?php echo $d['bg_warna']; ?>">
-              </div>
-
-              <div class="form-group">
-                <label for="Warna">Warna Text</label>
-                <input type="color" name="warna_text" value="<?php echo $d['text_warna']; ?>">
-              </div>
-
-              <div class="form-group ">
-                <label for="nama">Facebook</label>
-                <input type="text" name="facebook" class="form-control" value="<?php echo $d['facebook']; ?>">
-              </div>
-
-              <div class="form-group ">
-                <label for="nama">Instagram</label>
-                <input type="text" name="instagram" class="form-control" value="<?php echo $d['instagram']; ?>">
-              </div>
-
-              <button type="submit" class="btn btn-warning" name="ubah">Ubah</button>
-            </form>
+                  function waktu() {
+                    var waktu = new Date();
+                    setTimeout("waktu()", 1000);
+                    document.getElementById("jam").innerHTML = waktu.getHours() + ":" + String(waktu.getMinutes()).padStart(2, "0");
+                  }
+                </script>
+                <script>
+                  var tw = new Date();
+                  if (tw.getTimezoneOffset() == 0)(a = tw.getTime() + (7 * 60 * 60 * 1000))
+                  else(a = tw.getTime());
+                  tw.setTime(a);
+                  var tahun = tw.getFullYear();
+                  var hari = tw.getDay();
+                  var bulan = tw.getMonth();
+                  var tanggal = tw.getDate();
+                  var hariarray = new Array("Minggu,", "Senin,", "Selasa,", "Rabu,", "Kamis,", "Jumat,", "Sabtu,");
+                  var bulanarray = new Array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+                  document.getElementById("tanggal").innerHTML = hariarray[hari] + " " + tanggal + " " + bulanarray[bulan] + " " + tahun;
+                </script>
+              </span>
+            </div>
+            <!-- /.info-box-content -->
           </div>
+          <!-- /.info-box -->
+          <!-- Info boxes -->
+          <div class="row">
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box">
+                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-map-marked-alt"></i></span>
+                <?php
+                include '../koneksi.php';
+                $data_wisata = mysqli_query($koneksi, "SELECT * FROM wisata");
+                $jumlah_wisata = mysqli_num_rows($data_wisata);
+                ?>
+                <div class="info-box-content">
+                  <span class="info-box-text">Wisata</span>
+                  <span class="info-box-number">
+                    <?php echo $jumlah_wisata; ?>
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+
+            <!-- fix for small devices only -->
+            <div class="clearfix hidden-md-up"></div>
+
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-image"></i></span>
+                <?php
+                include '../koneksi.php';
+                $data_galeri = mysqli_query($koneksi, "SELECT * FROM galeri");
+                $jumlah_galeri = mysqli_num_rows($data_galeri);
+                ?>
+                <div class="info-box-content">
+                  <span class="info-box-text">Galeri</span>
+                  <span class="info-box-number">
+                    <?php echo $jumlah_galeri; ?>
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-calendar-alt"></i></span>
+                <?php
+                include '../koneksi.php';
+                $data_kegiatan = mysqli_query($koneksi, "SELECT * FROM kegiatan");
+                $jumlah_kegiatan = mysqli_num_rows($data_kegiatan);
+                ?>
+                <div class="info-box-content">
+                  <span class="info-box-text">Kegiatan</span>
+                  <span class="info-box-number"><?php echo $jumlah_kegiatan; ?></span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-light elevation-1"><i class="fas fa-suitcase-rolling"></i></span>
+                <?php
+                include '../koneksi.php';
+                $data_paket_wisata = mysqli_query($koneksi, "SELECT * FROM paket_wisata");
+                $jumlah_paket = mysqli_num_rows($data_paket_wisata);
+                ?>
+                <div class="info-box-content">
+                  <span class="info-box-text">Paket Wisata</span>
+                  <span class="info-box-number"><?php echo $jumlah_paket; ?></span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-shopping-cart"></i></span>
+                <?php
+                include '../koneksi.php';
+                $data_umkm = mysqli_query($koneksi, "SELECT * FROM umkm");
+                $jumlah_umkm = mysqli_num_rows($data_umkm);
+                ?>
+                <div class="info-box-content">
+                  <span class="info-box-text">UMKM</span>
+                  <span class="info-box-number"><?php echo $jumlah_umkm; ?></span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+
+
         </div>
-        <!-- /.content -->
-      <?php
-      } ?>
+        <!-- /.row -->
     </div>
-    <!-- /.content-wrapper -->
+    <!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
 
 
 
-    <!-- Main Footer -->
-    <footer class="main-footer">
-      <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-      All rights reserved.
-      <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 3.1.0
-      </div>
-    </footer>
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 3.1.0
+    </div>
+  </footer>
   </div>
   <!-- ./wrapper -->
 
@@ -260,6 +352,5 @@ if ($_SESSION['status'] != "login") {
   <script src="dist/js/adminlte.js"></script>
 
 </body>
-
 
 </html>

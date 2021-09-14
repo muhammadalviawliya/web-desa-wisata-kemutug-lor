@@ -19,7 +19,7 @@ if ($cek > 0) {
     $data_user = mysqli_fetch_assoc($data);
     $_SESSION['nama'] = $data_user['nama'];
     $_SESSION['status'] = "login";
-    header("location:index.php");
+    header("location:home.php");
 } else {
-    header("location:login.php?pesan=gagal");
+    header("location:index.php?pesan=gagal");
 }
