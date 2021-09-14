@@ -192,44 +192,44 @@
         <div class="container">
 
           <div class="table-responsive-md mt-5 ml-5 mr-5">
-            <a class="btn btn-success btn-sm mb-3" href="tambah_wisata.php">Tambah</a>
+            <a class="btn btn-success btn-sm mb-3" href="tambah_kegiatan.php">Tambah</a>
             <table class="table table-bordered table-striped table-hover">
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Wisata</th>
-                  <th>Deskripsi</th>
-                  <th>Jenis Wisata</th>
+                  <th>judul</th>
+                  <th>tanggal</th>
                   <th>Gambar</th>
+                  <th>Deskripsi</th>
                   <th>Opsi</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
                 include '../koneksi.php';
-                $batas = 5;
+                $batas = 2;
                 $halaman = isset($_GET['halaman']) ? (int)$_GET['halaman'] : 1;
                 $halaman_awal = ($halaman > 1) ? ($halaman * $batas) - $batas : 0;
 
                 $previous = $halaman - 1;
                 $next = $halaman + 1;
-                $data = mysqli_query($koneksi, "select * from wisata");
+                $data = mysqli_query($koneksi, "select * from kegiatan");
                 $jumlah_data = mysqli_num_rows($data);
                 $total_halaman = ceil($jumlah_data / $batas);
 
-                $data_pegawai = mysqli_query($koneksi, "select * from wisata limit $halaman_awal, $batas");
+                $data_pegawai = mysqli_query($koneksi, "select * from kegiatan limit $halaman_awal, $batas");
                 $nomor = $halaman_awal + 1;
                 while ($d = mysqli_fetch_array($data_pegawai)) {
                 ?>
                   <tr>
                     <td><?php echo $nomor++; ?></td>
-                    <td><?php echo $d['nama'] ?></td>
-                    <td><?php echo $d['deskripsi'] ?></td>
-                    <td><?php echo $d['jenis_wisata'] ?></td>
+                    <td><?php echo $d['judul'] ?></td>
+                    <td><?php echo $d['tanggal'] ?></td>
                     <td><img src="../images/<?php echo $d['gambar'] ?>" alt="" width="50px" height="50px"></td>
+                    <td><?php echo $d['deskripsi'] ?></td>
                     <td>
-                      <a class="btn btn-warning btn-sm" href="edit_wisata.php?id_wisata=<?php echo $d['id_wisata'] ?>">Ubah</a>
-                      <a class="btn btn-danger btn-sm" href="hapus_wisata.php?id_wisata=<?php echo $d['id_wisata'] ?>">Hapus</a>
+                      <a class="btn btn-warning btn-sm" href="edit_kegiatan.php?id_kegiatan=<?php echo $d['id_kegiatan'] ?>">Ubah</a>
+                      <a class="btn btn-danger btn-sm" href="hapus_kegiatan.php?id_kegiatan=<?php echo $d['id_kegiatan'] ?>">Hapus</a>
                     </td>
                   </tr>
                 <?php

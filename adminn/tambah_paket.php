@@ -1,9 +1,8 @@
-  <?php
-  session_start();
-  if ($_SESSION['status'] != "login") {
-    header("location:login.php?pesan=belum_login");
-  }
-  ?>
+<?php
+include '../koneksi.php';
+$data = mysqli_query($koneksi, "select * from pengaturan WHERE id='1' ");
+while ($d = mysqli_fetch_array($data)) {
+?>
   <!DOCTYPE html>
   <html lang="en">
 
@@ -68,7 +67,7 @@
             </div>
             <div class="info">
               <h6>admin</h6>
-              <a type="button" class="btn btn-danger btn-xs" href="logout.php">Logout</a>
+              <button type="button" class="btn btn-danger btn-xs">Logout</button>
             </div>
           </div>
 
@@ -113,7 +112,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="galeri.php" class="nav-link">
+                <a href="./index.html" class="nav-link">
                   <i class="nav-icon fas fa-image"></i>
                   <p>
                     Galeri
@@ -174,12 +173,12 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0">Wisata</h1>
+                <h1 class="m-0">Pengaturan</h1>
               </div><!-- /.col -->
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Wisata</li>
+                  <li class="breadcrumb-item"><a href="#">Wisata</a></li>
+                  <li class="breadcrumb-item active">Tambah</li>
                 </ol>
               </div><!-- /.col -->
             </div><!-- /.row -->
@@ -188,81 +187,31 @@
         <!-- /.content-header -->
 
         <!-- Main content -->
-
         <div class="container">
+          <div class="row justify-content-center mt-5 ml-5 mb-5">
+            <form class="col-8" method="POST" action="proses_tambah_paket.php">
+              <div class=" form-group ">
+                <label for=" nama">judul</label>
+                <input type="text" name="judul" class="form-control">
+              </div>
+              <div class="form-group ">
+                <label for="nama">Deskripsi</label>
+                <textarea name="deskripsi" rows="10" class="form-control"></textarea>
+              </div>
+              <div class="form-group ">
+                <label for="nama">harga</label>
+                <textarea name="harga" rows="10" class="form-control"></textarea>
+              </div>
+              <div class=" form-group ">
+                <label for=" nama">No WhatsApp</label>
+                <input type="text" name="no_wa" class="form-control">
+              </div>
 
-          <div class="table-responsive-md mt-5 ml-5 mr-5">
-            <a class="btn btn-success btn-sm mb-3" href="tambah_wisata.php">Tambah</a>
-            <table class="table table-bordered table-striped table-hover">
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Wisata</th>
-                  <th>Deskripsi</th>
-                  <th>Jenis Wisata</th>
-                  <th>Gambar</th>
-                  <th>Opsi</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                include '../koneksi.php';
-                $batas = 5;
-                $halaman = isset($_GET['halaman']) ? (int)$_GET['halaman'] : 1;
-                $halaman_awal = ($halaman > 1) ? ($halaman * $batas) - $batas : 0;
-
-                $previous = $halaman - 1;
-                $next = $halaman + 1;
-                $data = mysqli_query($koneksi, "select * from wisata");
-                $jumlah_data = mysqli_num_rows($data);
-                $total_halaman = ceil($jumlah_data / $batas);
-
-                $data_pegawai = mysqli_query($koneksi, "select * from wisata limit $halaman_awal, $batas");
-                $nomor = $halaman_awal + 1;
-                while ($d = mysqli_fetch_array($data_pegawai)) {
-                ?>
-                  <tr>
-                    <td><?php echo $nomor++; ?></td>
-                    <td><?php echo $d['nama'] ?></td>
-                    <td><?php echo $d['deskripsi'] ?></td>
-                    <td><?php echo $d['jenis_wisata'] ?></td>
-                    <td><img src="../images/<?php echo $d['gambar'] ?>" alt="" width="50px" height="50px"></td>
-                    <td>
-                      <a class="btn btn-warning btn-sm" href="edit_wisata.php?id_wisata=<?php echo $d['id_wisata'] ?>">Ubah</a>
-                      <a class="btn btn-danger btn-sm" href="hapus_wisata.php?id_wisata=<?php echo $d['id_wisata'] ?>">Hapus</a>
-                    </td>
-                  </tr>
-                <?php
-                }
-                ?>
-              </tbody>
-            </table>
-            <nav>
-              <ul class="pagination justify-content-center">
-                <li class="page-item">
-                  <a class="page-link bg-light" <?php if ($halaman > 1) {
-                                                  echo "href='?halaman=$previous'";
-                                                } ?>>Previous</a>
-                </li>
-                <?php
-                for ($x = 1; $x <= $total_halaman; $x++) {
-                ?>
-                  <li class="page-item"><a class="page-link bg-light" href="?halaman=<?php echo $x ?>"><?php echo $x; ?></a></li>
-                <?php
-                }
-                ?>
-                <li class="page-item">
-                  <a class="page-link bg-light" <?php if ($halaman < $total_halaman) {
-                                                  echo "href='?halaman=$next'";
-                                                } ?>>Next</a>
-                </li>
-              </ul>
-            </nav>
+              <button type="submit" class="btn btn-success" name="Tambah">Tambah</button>
+            </form>
           </div>
-
         </div>
         <!-- /.content -->
-
       </div>
       <!-- /.content-wrapper -->
 
@@ -290,6 +239,7 @@
     <script src="dist/js/adminlte.js"></script>
 
   </body>
-
+<?php
+} ?>
 
   </html>

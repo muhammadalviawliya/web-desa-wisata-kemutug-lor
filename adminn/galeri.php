@@ -1,3 +1,9 @@
+  <?php
+  session_start();
+  if ($_SESSION['status'] != "login") {
+    header("location:login.php?pesan=belum_login");
+  }
+  ?>
   <!DOCTYPE html>
   <html lang="en">
 
@@ -61,8 +67,8 @@
               <img src="dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-              <h6>admin</h6>
-              <button type="button" class="btn btn-danger btn-xs">Logout</button>
+              <h6><?= @$_SESSION['nama']; ?></h6>
+              <a type="button" class="btn btn-danger btn-xs" href="logout.php">Logout</a>
             </div>
           </div>
 

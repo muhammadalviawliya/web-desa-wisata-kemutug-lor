@@ -1,4 +1,11 @@
 <?php
+session_start();
+if ($_SESSION['status'] != "login") {
+  header("location:login.php?pesan=belum_login");
+}
+?>
+
+<?php
 include '../koneksi.php';
 $data = mysqli_query($koneksi, "select * from pengaturan WHERE id='1' ");
 while ($d = mysqli_fetch_array($data)) {
@@ -67,7 +74,7 @@ while ($d = mysqli_fetch_array($data)) {
             </div>
             <div class="info">
               <h6>admin</h6>
-              <button type="button" class="btn btn-danger btn-xs">Logout</button>
+              <a type="button" class="btn btn-danger btn-xs" href="logout.php">Logout</a>
             </div>
           </div>
 
@@ -197,20 +204,12 @@ while ($d = mysqli_fetch_array($data)) {
 
               <div class="form-group">
                 <label for="Warna">Warna</label>
-                <select name="kode" class="form-control">
-                  <?php
-                  $sql = "select * from warna";
-                  $hasil = mysqli_query($koneksi, $sql);
-                  while ($data = mysqli_fetch_array($hasil)) {
-                    if ($d['kode'] == $data['kode']) {
-                      $select = "selected";
-                    } else {
-                      $select = "";
-                    }
-                    echo "<option $select>" . $data['kode'] . "</option>";
-                  }
-                  ?>
-                </select>
+                <input type="color" name="warna" value="<?php echo $d['bg_warna']; ?>">
+              </div>
+
+              <div class="form-group">
+                <label for="Warna">Warna Text</label>
+                <input type="color" name="warna_text" value="<?php echo $d['text_warna']; ?>">
               </div>
 
               <div class="form-group ">

@@ -1,3 +1,9 @@
+<?php
+session_start();
+if ($_SESSION['status'] != "login") {
+  header("location:login.php?pesan=belum_login");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,7 +67,8 @@
             <img src="dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">admin</a>
+            <h6><?= @$_SESSION['nama']; ?></h6>
+            <a type="button" class="btn btn-danger btn-xs" href="logout.php">Logout</a>
           </div>
         </div>
 
@@ -269,10 +276,14 @@
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
                 <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-calendar-alt"></i></span>
-
+                <?php
+                include '../koneksi.php';
+                $data_kegiatan = mysqli_query($koneksi, "SELECT * FROM kegiatan");
+                $jumlah_kegiatan = mysqli_num_rows($data_kegiatan);
+                ?>
                 <div class="info-box-content">
                   <span class="info-box-text">Kegiatan</span>
-                  <span class="info-box-number">2,000</span>
+                  <span class="info-box-number"><?php echo $jumlah_kegiatan; ?></span>
                 </div>
                 <!-- /.info-box-content -->
               </div>
@@ -282,10 +293,14 @@
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
                 <span class="info-box-icon bg-light elevation-1"><i class="fas fa-suitcase-rolling"></i></span>
-
+                <?php
+                include '../koneksi.php';
+                $data_paket_wisata = mysqli_query($koneksi, "SELECT * FROM paket_wisata");
+                $jumlah_paket = mysqli_num_rows($data_paket_wisata);
+                ?>
                 <div class="info-box-content">
                   <span class="info-box-text">Paket Wisata</span>
-                  <span class="info-box-number">2,000</span>
+                  <span class="info-box-number"><?php echo $jumlah_paket; ?></span>
                 </div>
                 <!-- /.info-box-content -->
               </div>
@@ -295,10 +310,14 @@
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
                 <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-shopping-cart"></i></span>
-
+                <?php
+                include '../koneksi.php';
+                $data_umkm = mysqli_query($koneksi, "SELECT * FROM umkm");
+                $jumlah_umkm = mysqli_num_rows($data_umkm);
+                ?>
                 <div class="info-box-content">
                   <span class="info-box-text">UMKM</span>
-                  <span class="info-box-number">2,000</span>
+                  <span class="info-box-number"><?php echo $jumlah_umkm; ?></span>
                 </div>
                 <!-- /.info-box-content -->
               </div>

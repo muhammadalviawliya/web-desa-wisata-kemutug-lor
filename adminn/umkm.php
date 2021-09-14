@@ -67,7 +67,7 @@
               <img src="dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-              <h6>admin</h6>
+              <h6><?= @$_SESSION['nama']; ?></h6>
               <a type="button" class="btn btn-danger btn-xs" href="logout.php">Logout</a>
             </div>
           </div>
@@ -174,12 +174,12 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0">Wisata</h1>
+                <h1 class="m-0">UMKM</h1>
               </div><!-- /.col -->
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Wisata</li>
+                  <li class="breadcrumb-item active">UMKM</li>
                 </ol>
               </div><!-- /.col -->
             </div><!-- /.row -->
@@ -191,16 +191,16 @@
 
         <div class="container">
 
-          <div class="table-responsive-md mt-5 ml-5 mr-5">
-            <a class="btn btn-success btn-sm mb-3" href="tambah_wisata.php">Tambah</a>
-            <table class="table table-bordered table-striped table-hover">
+          <div class="table-responsive-md mt-5 ml-5 mr-5 ">
+            <a class="btn btn-success btn-sm mb-3" href="tambah_umkm.php">Tambah</a>
+            <table class="table table-bordered table-striped table-hover ">
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Wisata</th>
-                  <th>Deskripsi</th>
-                  <th>Jenis Wisata</th>
-                  <th>Gambar</th>
+                  <th>Nama</th>
+                  <th>gambar</th>
+                  <th>harga</th>
+                  <th>deskripsi</th>
                   <th>Opsi</th>
                 </tr>
               </thead>
@@ -213,23 +213,23 @@
 
                 $previous = $halaman - 1;
                 $next = $halaman + 1;
-                $data = mysqli_query($koneksi, "select * from wisata");
+                $data = mysqli_query($koneksi, "select * from umkm");
                 $jumlah_data = mysqli_num_rows($data);
                 $total_halaman = ceil($jumlah_data / $batas);
 
-                $data_pegawai = mysqli_query($koneksi, "select * from wisata limit $halaman_awal, $batas");
+                $data_pegawai = mysqli_query($koneksi, "select * from umkm limit $halaman_awal, $batas");
                 $nomor = $halaman_awal + 1;
                 while ($d = mysqli_fetch_array($data_pegawai)) {
                 ?>
                   <tr>
                     <td><?php echo $nomor++; ?></td>
                     <td><?php echo $d['nama'] ?></td>
-                    <td><?php echo $d['deskripsi'] ?></td>
-                    <td><?php echo $d['jenis_wisata'] ?></td>
                     <td><img src="../images/<?php echo $d['gambar'] ?>" alt="" width="50px" height="50px"></td>
+                    <td><?php echo $d['harga'] ?></td>
+                    <td><?php echo $d['deskripsi'] ?></td>
                     <td>
-                      <a class="btn btn-warning btn-sm" href="edit_wisata.php?id_wisata=<?php echo $d['id_wisata'] ?>">Ubah</a>
-                      <a class="btn btn-danger btn-sm" href="hapus_wisata.php?id_wisata=<?php echo $d['id_wisata'] ?>">Hapus</a>
+                      <a class="btn btn-warning btn-sm" href="edit_umkm.php?id_umkm=<?php echo $d['id_umkm'] ?>">Ubah</a>
+                      <a class="btn btn-danger btn-sm" href="hapus_umkm.php?id_umkm=<?php echo $d['id_umkm'] ?>">Hapus</a>
                     </td>
                   </tr>
                 <?php

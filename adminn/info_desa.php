@@ -1,4 +1,11 @@
 <?php
+session_start();
+if ($_SESSION['status'] != "login") {
+  header("location:login.php?pesan=belum_login");
+}
+?>
+
+<?php
 include '../koneksi.php';
 $data = mysqli_query($koneksi, "select * from info_desa WHERE id='1' ");
 while ($d = mysqli_fetch_array($data)) {
@@ -67,7 +74,7 @@ while ($d = mysqli_fetch_array($data)) {
             </div>
             <div class="info">
               <h6>admin</h6>
-              <button type="button" class="btn btn-danger btn-xs">Logout</button>
+              <a type="button" class="btn btn-danger btn-xs" href="logout.php">Logout</a>
             </div>
           </div>
 

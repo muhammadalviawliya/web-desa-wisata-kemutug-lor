@@ -192,14 +192,12 @@
         <div class="container">
 
           <div class="table-responsive-md mt-5 ml-5 mr-5">
-            <a class="btn btn-success btn-sm mb-3" href="tambah_wisata.php">Tambah</a>
+            <a class="btn btn-success btn-sm mb-3" href="tambah_carousel.php">Tambah</a>
             <table class="table table-bordered table-striped table-hover">
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Wisata</th>
-                  <th>Deskripsi</th>
-                  <th>Jenis Wisata</th>
+                  <th>judul</th>
                   <th>Gambar</th>
                   <th>Opsi</th>
                 </tr>
@@ -213,23 +211,21 @@
 
                 $previous = $halaman - 1;
                 $next = $halaman + 1;
-                $data = mysqli_query($koneksi, "select * from wisata");
+                $data = mysqli_query($koneksi, "select * from carousel");
                 $jumlah_data = mysqli_num_rows($data);
                 $total_halaman = ceil($jumlah_data / $batas);
 
-                $data_pegawai = mysqli_query($koneksi, "select * from wisata limit $halaman_awal, $batas");
+                $data_pegawai = mysqli_query($koneksi, "select * from carousel limit $halaman_awal, $batas");
                 $nomor = $halaman_awal + 1;
                 while ($d = mysqli_fetch_array($data_pegawai)) {
                 ?>
                   <tr>
                     <td><?php echo $nomor++; ?></td>
-                    <td><?php echo $d['nama'] ?></td>
-                    <td><?php echo $d['deskripsi'] ?></td>
-                    <td><?php echo $d['jenis_wisata'] ?></td>
+                    <td><?php echo $d['judul'] ?></td>
                     <td><img src="../images/<?php echo $d['gambar'] ?>" alt="" width="50px" height="50px"></td>
                     <td>
-                      <a class="btn btn-warning btn-sm" href="edit_wisata.php?id_wisata=<?php echo $d['id_wisata'] ?>">Ubah</a>
-                      <a class="btn btn-danger btn-sm" href="hapus_wisata.php?id_wisata=<?php echo $d['id_wisata'] ?>">Hapus</a>
+                      <a class="btn btn-warning btn-sm" href="edit_carousel.php?active=<?php echo $d['active'] ?>">Ubah</a>
+                      <a class="btn btn-danger btn-sm" href="hapus_carousel.php?active=<?php echo $d['active'] ?>">Hapus</a>
                     </td>
                   </tr>
                 <?php

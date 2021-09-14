@@ -30,17 +30,19 @@ while ($d = mysqli_fetch_array($data)) {
 
     <body>
         <!-- navbar -->
-        <section class="navbar navbar-expand-lg navbar-dark <?php echo $d['kode']; ?> ">
+        <section class="navbar navbar-expand-lg " style="background-color:<?php echo $d['bg_warna']; ?>">
             <div class="container">
-                <a class="navbar-brand" href="#"><?php echo $d['nama_desa']; ?></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <a class="navbar-brand" style="color:<?php echo $d['text_warna']; ?>"><?php echo $d['nama_desa']; ?></a>
+                <button class=" navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon">
+                        <i class="fa fa-navicon" style="color:<?php echo $d['text_warna']; ?>; font-size:20px;"></i>
+                    </span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav  ml-auto">
-                        <a class="nav-link" href="index.php">Home</a>
+                <div class=" collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link" href="index.php" style="color:<?php echo $d['text_warna']; ?>">Home</a>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class=" nav-link dropdown-toggle" style="color:<?php echo $d['text_warna']; ?>" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Wisata
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
@@ -49,9 +51,10 @@ while ($d = mysqli_fetch_array($data)) {
                                 <li><a class="dropdown-item" href="wisata_budaya.php">Budaya</a></li>
                             </ul>
                         </li>
-                        <a class="nav-link" href="#">Artikel</a>
-                        <a class="nav-link" href="Paket_wisata.php">Paket Wisata</a>
-                        <a class="nav-link" href="#">UMKM Desa</a>
+                        <a class="nav-link" href="galeri.php" style="color:<?php echo $d['text_warna']; ?>">Galeri</a>
+                        <a class="nav-link" href="kegiatan.php" style="color:<?php echo $d['text_warna']; ?>">Kegiatan</a>
+                        <a class=" nav-link" href="Paket_wisata.php" style="color:<?php echo $d['text_warna']; ?>">Paket Wisata</a>
+                        <a class=" nav-link" href="umkm.php" style="color:<?php echo $d['text_warna']; ?>">UMKM Desa</a>
                     </div>
                 </div>
             </div>
@@ -59,44 +62,55 @@ while ($d = mysqli_fetch_array($data)) {
         <!-- navbar end -->
 
         <!-- carousel -->
-        <section id="demo" class="carousel slide" data-ride="carousel">
+        <section id="transition-timer-carousel" class="carousel slide" data-ride="carousel">
 
             <!-- Indicators -->
             <ul class="carousel-indicators">
-                <li data-target="#demo" data-slide-to="0" class="active"></li>
-                <li data-target="#demo" data-slide-to="1"></li>
-                <li data-target="#demo" data-slide-to="2"></li>
+                <?php
+                include 'koneksi.php';
+
+                $count = mysqli_query($koneksi, "SELECT COUNT(*) FROM carousel");
+                $count = mysqli_num_rows($count);
+                for ($i = 0; $i < $count; $i++) {
+                    echo '<li data-target="#transition-timer-carousel" data-slide-to="' . $i . '"';
+                    if ($i == 0) {
+                        echo 'class="active"';
+                    }
+                    echo '></li>';
+                }
+                ?>
             </ul>
 
             <!-- The slideshow -->
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="images/curug-pinang.jpg" alt="Gambar - 1" width="1280" height="700">
+                <?php
+                //Query database
+                $sql = mysqli_query($koneksi, "SELECT * FROM carousel ORDER BY active DESC");
+                //$sql = mysql_query("SELECT * FROM carousel ORDER BY active DESC");
+                while ($row = mysqli_fetch_assoc($sql)) {
+                    echo
+                    '
+                <div class="carousel-item ';
+                    if ($row['active'] == 1) {
+                        echo 'active';
+                    }
+                    echo '">
+                    <img src="images/' . $row['gambar'] . '" alt="Gambar - 1" width="500" height="200">
                     <div class="carousel-caption">
-                        <h3>Curug Pinang</h3>
-                    </div>
-
-                </div>
-                <div class="carousel-item">
-                    <img src="images/wanawisata.jpg" alt="Gambar - 2" width="1280" height="700">
-                    <div class="carousel-caption">
-                        <h3>Wanawisata Baturraden</h3>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="images/kebun-raya.jpg" alt="Gambar - 3" width="1280" height="700">
-                    <div class="carousel-caption">
-                        <h3>Kebun Raya Baturraden</h3>
+                        <h3 style="font-size:20px">' . $row['judul'] . '</h3>
                     </div>
                 </div>
+               ';
+                }
+                ?>
             </div>
 
 
             <!-- Left and right controls -->
-            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <a class="carousel-control-prev" href="#transition-timer-carousel" data-slide="prev">
                 <span class="carousel-control-prev-icon"></span>
             </a>
-            <a class="carousel-control-next" href="#demo" data-slide="next">
+            <a class="carousel-control-next" href="#transition-timer-carousel" data-slide="next">
                 <span class="carousel-control-next-icon"></span>
             </a>
         </section>
@@ -148,12 +162,12 @@ while ($d = mysqli_fetch_array($data)) {
             </div>
         <?php } ?>
         <!-- FOOTER -->
-        <div class="container-fluid  <?php echo $d['kode']; ?> text-light">
-            <footer class="row row-cols-5 py-5  border-top">
-                <div class="col ">
-                    <a class="navbar-brand text-light" href="#"><?php echo $d['nama_desa']; ?></a>
-                    <p class=" text-light">© 2021 VIII DEV</p>
-                    <a href="<?php echo $d['facebook']; ?>" class="fa fa-facebook"></a>
+        <div class="container-fluid " style="background-color:<?php echo $d['bg_warna']; ?>">
+            <footer class="row row-cols-5 py-5   border-top">
+                <div class=" col ">
+                    <a class=" navbar-brand" style="color:<?php echo $d['text_warna']; ?>"><?php echo $d['nama_desa']; ?></a>
+                    <p style="color:<?php echo $d['text_warna']; ?>">© 2021 VIII DEV</p>
+                    <a href=" <?php echo $d['facebook']; ?>" class="fa fa-facebook"></a>
                     <a href="<?php echo $d['instagram']; ?>" class="fa fa-instagram"></a>
                 </div>
 
@@ -162,32 +176,27 @@ while ($d = mysqli_fetch_array($data)) {
                 </div>
 
                 <div class="col">
-                    <h5 class="text-warning">Tentang Kami</h5>
+                    <h5 style="color:<?php echo $d['text_warna']; ?>;font-weight:bold;font-style:italic;">Tentang Kami</h5>
                     <ul class="nav flex-column ">
-                        <li class="nav-item mb-2 "><a href="index.php" class="nav-link p-0  text-light">Profil desa</a>
+                        <li class="nav-item mb-2 "><a href="index.php" class="nav-link p-0" style="color:<?php echo $d['text_warna']; ?>">Profil desa</a>
                         </li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">galeri</a></li>
+                        <li class=" nav-item mb-2"><a href="galeri.php" class="nav-link p-0" style="color:<?php echo $d['text_warna']; ?>">galeri</a></li>
+                        <li class=" nav-item mb-2"><a href="kegiatan.php" class="nav-link p-0" style="color:<?php echo $d['text_warna']; ?>">Kegiatan</a></li>
 
-                    </ul>
-                </div>
-                <div class="col">
-                    <h5 class="text-warning">Berita</h5>
-                    <ul class="nav flex-column ">
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Artikel</a></li>
                     </ul>
                 </div>
 
                 <div class="col">
-                    <h5 class="text-warning">Potensi Desa</h5>
+                    <h5 style="color:<?php echo $d['text_warna']; ?>;font-weight:bold;font-style:italic;">Potensi Desa</h5>
                     <ul class="nav flex-column ">
-                        <li class="nav-item mb-2"><a href="wisata_alam.php" class="nav-link p-0 text-light">wisata alam</a>
-                        </li>
-                        <li class="nav-item mb-2"><a href="wisata_religi.php" class="nav-link p-0 text-light">wisata
+                        <li class="nav-item mb-2"><a href="wisata_alam.php" class="nav-link p-0" style="color:<?php echo $d['text_warna']; ?>">wisata
+                                alam</a></li>
+                        <li class="nav-item mb-2"><a href="wisata_religi.php" class="nav-link p-0" style="color:<?php echo $d['text_warna']; ?>">wisata
                                 religi</a></li>
-                        <li class="nav-item mb-2"><a href="wisata_budaya.php" class="nav-link p-0 text-light">wisata
+                        <li class="nav-item mb-2"><a href="wisata_budaya.php" class="nav-link p-0 " style="color:<?php echo $d['text_warna']; ?>">wisata
                                 Budaya</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">UMKM</a></li>
-                        <li class="nav-item mb-2"><a href="Paket_wisata.php" class="nav-link p-0 text-light">paket
+                        <li class="nav-item mb-2"><a href="umkm.php" class="nav-link p-0" style="color:<?php echo $d['text_warna']; ?>">UMKM</a></li>
+                        <li class="nav-item mb-2"><a href="Paket_wisata.php" class="nav-link p-0" style="color:<?php echo $d['text_warna']; ?>">paket
                                 wisata</a></li>
                     </ul>
                 </div>
