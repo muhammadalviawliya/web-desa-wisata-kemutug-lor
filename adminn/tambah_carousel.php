@@ -144,6 +144,22 @@ while ($d = mysqli_fetch_array($data)) {
                 </a>
               </li>
               <li class="nav-item">
+                <a href="carousel.php" class="nav-link">
+                  <i class="nav-icon fas fa-images"></i>
+                  <p>
+                    Carousel
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="admin.php" class="nav-link">
+                  <i class="nav-icon fas fa-user-friends"></i>
+                  <p>
+                    Admin
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="info_desa.php" class="nav-link">
                   <i class="nav-icon fas fa-info"></i>
                   <p>
